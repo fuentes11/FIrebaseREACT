@@ -12,6 +12,7 @@ import AddCommentsd from './Screens/AddComments';
 import Detailmeal from './Screens/Detailmeal';
 import Navigation from './NAV/Navigation';
 import Index from './Screens/Index';
+import LoginController from './NAV/LoginController'
 
 
 
@@ -57,8 +58,7 @@ function MyStack() {
 export default function App() {
   return (
     <NavigationContainer>
-      
-      <Navigation />
+       <LoginController/>
     </NavigationContainer>
   );
 };

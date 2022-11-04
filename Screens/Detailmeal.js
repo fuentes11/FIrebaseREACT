@@ -4,6 +4,7 @@ import { Avatar, Button, ListItem } from 'react-native-elements';
 import { collection,getDocs,doc, setDoc } from "firebase/firestore";
 import {firebase} from '../BBDD/bd';
 
+
 export default function Detailmeal(props) {
   const {navigation} = props;
     
@@ -28,7 +29,7 @@ export default function Detailmeal(props) {
       setLoading(false);
     };
   
-    const deleteComment = async () => {
+    /*const deleteComment = async () => {
       setLoading(true)
       const dbRef = todo.doc(props.route.params.sendId);
       await dbRef.delete();
@@ -48,16 +49,16 @@ export default function Detailmeal(props) {
           cancelable: true,
         }
       );
-    };
+    };*/
   
-    const updateComment = async () => {
+   /* const updateComment = async () => {
       const CommentRef = todo.doc(send.id);
       await CommentRef.set({
         Comments: send.Comments
       });
       setSend(initialState);
       props.navigation.navigate("CommentsG");
-    };
+    };*/
   
     useEffect(() => {
       getCommentById(props.route.params.sendId);

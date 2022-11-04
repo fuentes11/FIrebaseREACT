@@ -7,12 +7,17 @@ import { Ionicons } from '@expo/vector-icons';
 const Stack= createStackNavigator();
 export default function MealStack(){
     return(
-    <Stack.Navigator>
+    <Stack.Navigator 
+    >
     
     <Stack.Screen name="Home" component={Home}
-    options={{title:'Home'}}/>
+    options={{title:'Home',headerStyle: {
+        backgroundColor: '#113361',
+      },headerTintColor: '#ffff'}}/>
     <Stack.Screen name="CommentsG" component={CommentStack}
-    options={{title:'Comments'}}/>
+    options={{title:'Comments',headerStyle: {
+        backgroundColor: '#113361',
+      },}}/>
     </Stack.Navigator>
     );
     }

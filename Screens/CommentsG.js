@@ -1,10 +1,13 @@
 import { View, Text,SafeAreaView,StyleSheet, FlatList, TextInput, Keyboard, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Avatar, Button, ListItem } from 'react-native-elements';
+import { MaterialIcons,MaterialCommunityIcons,FontAwesome } from '@expo/vector-icons';
 
 import { collection,getDocs,doc, setDoc } from "firebase/firestore";
 import {firebase} from '../BBDD/bd';
+
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { color } from 'react-native-elements/dist/helpers';
 
 export default function CommentsG (props) {
   const {navigation} = props;
@@ -28,20 +31,25 @@ export default function CommentsG (props) {
       }, []);
     
       return (
-        <SafeAreaView>
+        <SafeAreaView 
+        style={styles.bck}>
+          
           <Button
+        style={styles.bckmeals}
         onPress={() => {
           props.navigation.navigate("AddComments");
         }}
         title="Create new comment"
       />
-        <ScrollView>
+      
+        <ScrollView style={{marginBottom:100}}>
         
           {dataa.map((send) => {
             
             return (
               
               <ListItem
+              containerStyle={styles.bckmeals}
                 key={send.id}
                 bottomDivider
                 onPress={() => {
@@ -49,24 +57,25 @@ export default function CommentsG (props) {
                     sendId: send.id,
                   });
                 }}
-              >
                 
-                <ListItem.Chevron />
-                <ListItem.Content>
-                  <ListItem.Title>{send.Comments}</ListItem.Title>
+              >
+                <MaterialCommunityIcons name="message-arrow-right" size={30} color="black" />
+                <ListItem.Content 
+                style={styles.commentss}>
+                  
+                  <ListItem.Title 
+                  >{send.Comments}</ListItem.Title>
 
                 </ListItem.Content>
               </ListItem>
+              
             );
           })}
         </ScrollView>
+        
         </SafeAreaView>
       );
-    
   
-
-
- 
   }
 
   const styles = StyleSheet.create({
@@ -91,5 +100,24 @@ export default function CommentsG (props) {
         borderRadius:10,
         marginBottom:15,
         padding:10,
-    }
+    },
+    commentss:{
+      widht: 100,
+      backgroung:'#E8E8E8',
+      padding: 6,
+      height: 40,
+      borderRadius: 6 ,
+      marginTop: 13
+    },
+    bck:{
+     
+      backgroundColor: '#113361',
+      
+  },
+  bckmeals:{
+      backgroundColor: '#F2CF66',
+      margin:15,
+      justifyContent: 'center',
+      
+  }
   });

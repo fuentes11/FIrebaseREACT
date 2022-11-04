@@ -31,11 +31,12 @@ export default function Home(props) {
             
             
             <View style={styles.container}>
-            <SafeAreaView>
-            <ScrollView>
-            <ListItem >
+            <SafeAreaView >
+            <ScrollView >
+            <ListItem containerStyle={{backgroundColor:"#F2CF66"}}
+            >
             <Avatar style={styles.image} rounded source={{uri: item.data().image}}></Avatar>
-              <ListItem.Content >
+              <ListItem.Content  >
                 <ListItem.Title>{item.data().name}</ListItem.Title>
                 <ListItem.Subtitle>{item.data().details}</ListItem.Subtitle>
                 <ListItem.Subtitle>{item.data().price}</ListItem.Subtitle>
@@ -55,12 +56,14 @@ export default function Home(props) {
     
   return (
     
-    <SafeAreaView>
+    <SafeAreaView
+    style={styles.bck}>
         
-   <View>
+   <View >
     <Text style={styles.text}>MEALS </Text>
     </View>
     <FlatList 
+    style={{marginBottom:90}}
     nestedScrollEnabled 
     data ={data}
     renderItem ={renderItem}
@@ -79,18 +82,26 @@ export default function Home(props) {
         marginLeft:20,
         marginRight:20,
         justifyContent: 'center',
-        backgroundColor: '#ecf0f1',
+        backgroundColor: '#113361',
         padding: 8,
     },
     text:{
         textAlign:'center',
         fontSize:42,
+        color:"#F2CF66"
     },
     image:{
         justifyContent:'center',
         display:'block',
         width:100,
         height:100,
+    },
+    bck:{
+        backgroundColor: '#113361',
+    },
+    bckmeals:{
+        backgroundColor: '#F2CF66',
+        
     }
   });
 

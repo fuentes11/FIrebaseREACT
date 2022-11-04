@@ -11,14 +11,19 @@ const Tab = createBottomTabNavigator();
 export default function Navigation(){
   return (
 
-        <Tab.Navigator>
-        <Tab.Screen name= "Meals" component={MealStack} options={{ title:'Meals ',headerShown:false,
+        <Tab.Navigator screenOptions={{
+          tabBarStyle: {
+            backgroundColor: '#113361',
+          },
+          
+        }}>
+        <Tab.Screen name= "Meals" component={MealStack} options={{ title:'Meals ',headerShown:false, 
       tabBarIcon: ({ color, size }) => (
-        <MaterialIcons name="fastfood" color={color} size={size} />
+        <MaterialIcons name="fastfood" color={'#F2CF66'} size={size} />
       ), }}/>
         <Tab.Screen name= "Comments" component={CommentStack} options={{ title:'Comments',headerShown:false ,
         tabBarIcon: ({ color, size }) => (
-        <FontAwesome name="comments" color={color} size={size} />
+        <FontAwesome name="comments" color={'#F2CF66'} size={size} />
       ), }}/>
         
         </Tab.Navigator>

@@ -1,7 +1,7 @@
 import { View, Text,SafeAreaView,StyleSheet, FlatList, TextInput, Keyboard, ScrollView, Alert } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Avatar, Button, ListItem } from 'react-native-elements';
-
+import { MaterialIcons,MaterialCommunityIcons,FontAwesome } from '@expo/vector-icons';
 import { collection,getDocs,doc, setDoc } from "firebase/firestore";
 import {firebase} from '../BBDD/bd';
 
@@ -42,14 +42,14 @@ return (
 
 <View style={styles.inputGroup}>
     
-     <View style={{marginTop:25}}>
-     <Text style={{fontSize:25}}>Leave your comments </Text>
+    
+     <Text style={{fontSize:25,color:'#ffff',margin:30}}>Leave your comments </Text>
         <TextInput
-        style={{height: 40}}
+        style={{height: 40,color:'white',marginLeft:30}}
+        placeholderTextColor='white'
         placeholder='write here'
         defaultValue={addData}
         onChangeText={newText => setAddData(newText)}
-        
         autoCapitalize={false}
         />
        
@@ -59,7 +59,7 @@ return (
         onPress={addField}
 
     />
-    </View>
+    
 
     
 </View>
@@ -71,10 +71,10 @@ const styles = StyleSheet.create({
       padding: 35,
     },
     inputGroup: {
+      backgroundColor: '#113361',
       color:"black",
       flex: 1,
       padding: 8,
-      margin: 15,
       borderBottomWidth: 1,
       borderBottomColor: "#cccccc",
     },
@@ -87,4 +87,11 @@ const styles = StyleSheet.create({
       alignItems: "center",
       justifyContent: "center",
     },
+    bck:{
+        backgroundColor: '#113361',
+    },
+    bckmeals:{
+        backgroundColor: '#F2CF66',
+        
+    }
   });

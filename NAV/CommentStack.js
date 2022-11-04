@@ -12,16 +12,22 @@ export default function CommentStack(){
     <Stack.Navigator>
     
     <Stack.Screen name="CommentsG" component={CommentsG}
-    options={{title:'Comments'}}/>
+    options={{title:'Comments',headerStyle: {
+        backgroundColor: '#113361',
+      },headerTintColor: '#ffff'}}/>
 
     <Stack.Screen name="Home" component={Home}
     options={{title:'Home'}}/>
 
     <Stack.Screen name="AddComments" component={AddComments}
-    options={{title:'AddComments'}}/>
+    options={{title:'AddComments',headerStyle: {
+        backgroundColor: '#113361',
+      },headerTintColor: '#ffff'}}/>
 
     <Stack.Screen name="Detailmeal" component={Detailmeal}
-    options={{title:'Detailmeal'}}/>
+    options={{title:'Detailmeal',headerStyle: {
+        backgroundColor: '#113361',
+      },headerTintColor: '#ffff'}}/>
     
     </Stack.Navigator>
     );

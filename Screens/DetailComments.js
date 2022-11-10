@@ -51,7 +51,7 @@ export default function DetailComments(props) {
       );
     };
   
-   const updateComment = async () => {
+      const updateComment = async () => { 
       const CommentRef = todo.doc(send.id);
       await CommentRef.set({
         Comments: send.Comments

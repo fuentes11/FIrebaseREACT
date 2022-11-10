@@ -14,6 +14,7 @@ import DetailComments from './Screens/DetailComments';
 import Navigation from './NAV/Navigation';
 import Index from './Screens/Index';
 import LoginController from './NAV/LoginController'
+import Cart from './Screens/Cart';
 
 
 
@@ -57,6 +58,11 @@ function MyStack() {
         name="Index"
         component={Index}
         options={{ title: "Index" }}
+      />
+      <Stack.Screen
+        name="Cart"
+        component={Cart}
+        options={{ title: "Cart" }}
       />
       
     </Stack.Navigator>

@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Home from '../Screens/Home';
 import CommentStack from '../Screens/CommentsG';
 import DetailMeal from '../Screens/DetailMeal';
+import Cart from '../Screens/Cart';
 import { Ionicons } from '@expo/vector-icons';
 
 const Stack= createStackNavigator();
@@ -23,6 +24,11 @@ export default function MealStack(){
     options={{title:'DetailMeal',headerStyle: {
         backgroundColor: '#113361',
       },headerTintColor: '#ffff'}}/>
+       <Stack.Screen name="Cart" component={Cart}
+    options={{title:'Cart',headerStyle: {
+        backgroundColor: '#113361',
+      },headerTintColor: '#ffff'}}/>
     </Stack.Navigator>
+
     );
     }

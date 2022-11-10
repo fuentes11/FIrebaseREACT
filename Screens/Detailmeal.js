@@ -1,14 +1,17 @@
 import { View, Text,SafeAreaView,StyleSheet, FlatList, TextInput, Keyboard, ScrollView,ActivityIndicator,Alert } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { Avatar, Button, ListItem } from 'react-native-elements';
+import { Avatar, Button, Icon, ListItem } from 'react-native-elements';
+import { AntDesign  } from '@expo/vector-icons';
 import { collection,getDocs,doc, setDoc } from "firebase/firestore";
 import {firebase} from '../BBDD/bd';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
-export default function Detailmeal(props) {
+export default function DetailMeal(props) {
   const {navigation} = props;
     
     const todo = firebase.firestore().collection('Meals');
+    const [count,setCount]=useState(1);
     const initialState = {
       id: "",
       name: "",
@@ -87,14 +90,60 @@ export default function Detailmeal(props) {
            <Text style={styles.content2}>{send.details}</Text>  
            <Text style={styles.content3}>{send.price}</Text>  
         </View>
-      
+        <View>
+          <TouchableOpacity
+          
+          style={styles.add}
+            
+            onPress={()=>{ 
+              props.navigation.navigate("Cart", {
+                sendId: send.id,
+              });
+
+            }}
+          > 
+          <Text style={styles.content4}
+          >Add to cart</Text>
+          </TouchableOpacity>
+          
+          
+        </View>
+
+      <View style={styles.container}>
+
+
+      <TouchableOpacity
+          activeOpacity={0.5}
+          onPress={()=>{
+            if(count > 1){
+              setCount(parseInt(count) -1);
+            }
+          }}      
+          ><AntDesign name="minuscircle" size={24} color="#F2CF66" />
+          </TouchableOpacity>
+          <Text style={styles.content}>{count}</Text>
+        <TouchableOpacity
+          activeOpacity={0.5}
+          onPress={()=>{
+            
+              setCount(parseInt(count)+1);
+          }}      
+          ><AntDesign name="pluscircle" size={24} color="#F2CF66" />
+          </TouchableOpacity>
+        
+          
+          </View>
+
       </ScrollView>
+      
     );
   };
 
   const styles = StyleSheet.create({
     container: {
-      flex: 1,
+      flex:1,
+      flexDirection: 'row',
+    justifyContent: 'space-between',
       padding: 35,
     },
     loader: {
@@ -144,6 +193,12 @@ export default function Detailmeal(props) {
         margin:5,
         color:'#F2CF66',
     },
+    content4:{
+      textAlign:'center',
+      fontSize:20,
+      margin:5,
+      color:'white',
+  },
     bck:{
         flex: 1,
         padding: 35,
@@ -155,5 +210,12 @@ export default function Detailmeal(props) {
         margin:15,
         justifyContent: 'center',
         
+    },
+    add:{
+      backgroundColor: 'green',
+      borderWidth: 4,
+        borderRadius:21,
+          borderColor: "#F2CF66",
+          margin:4
     }
   });

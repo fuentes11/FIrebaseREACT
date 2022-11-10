@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React,{ useEffect} from 'react';
 import { StyleSheet, Text, View, SafeAreaView} from 'react-native';
-
 
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
@@ -14,13 +13,14 @@ import DetailComments from './Screens/DetailComments';
 import Navigation from './NAV/Navigation';
 import Index from './Screens/Index';
 import LoginController from './NAV/LoginController'
-
-
+import { firebase } from './BBDD/bd' 
+import { useState } from 'react';
 
 
 function MyStack() {
   const Stack = createStackNavigator();
   return (
+    
     <Stack.Navigator
       
     >
@@ -42,7 +42,7 @@ function MyStack() {
       
      
       <Stack.Screen
-        name="Detailmeal"
+        name="DetailMeal"
         component={Detailmeal}
         options={{ title: "Detailmeal" }}
       />
@@ -63,14 +63,30 @@ function MyStack() {
   );
 };
 export default function App() {
+  const [initializing, setInitializing] = useState(true);
+  const[user, setUser] = useState();
+
+  function onAuthStateChanged(user){
+    setUser(user);
+    if(initializing) setInitializing(false);
+  }
+  useEffect(() => {
+    const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber;
+  }, []);
+  if(initializing) return null;
+  if(!user){
   return (
+    
     <NavigationContainer>
        
-       <Navigation/>
+       <LoginController/>
     </NavigationContainer>
+    
   );
+  
 };
-
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -5,7 +5,7 @@ import { collection,getDocs,doc, setDoc } from "firebase/firestore";
 import {firebase} from '../BBDD/bd';
 
 
-export default function Detailmeal(props) {
+export default function DetailMeal(props) {
   const {navigation} = props;
     
     const todo = firebase.firestore().collection('Meals');

@@ -9,7 +9,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import CommentsG from './Screens/CommentsG';
 import Home from './Screens/Home';
 import AddCommentsd from './Screens/AddComments';
-import Detailmeal from './Screens/Detailmeal';
+import Detailmeal from './Screens/DetailMeal';
+import DetailComments from './Screens/DetailComments';
 import Navigation from './NAV/Navigation';
 import Index from './Screens/Index';
 import LoginController from './NAV/LoginController'
@@ -45,6 +46,12 @@ function MyStack() {
         component={Detailmeal}
         options={{ title: "Detailmeal" }}
       />
+
+      <Stack.Screen
+        name="DetailComments"
+        component={DetailComments}
+        options={{ title: "DetailComments" }}
+      />
        
       <Stack.Screen
         name="Index"
@@ -58,7 +65,8 @@ function MyStack() {
 export default function App() {
   return (
     <NavigationContainer>
-       <LoginController/>
+       
+       <Navigation/>
     </NavigationContainer>
   );
 };

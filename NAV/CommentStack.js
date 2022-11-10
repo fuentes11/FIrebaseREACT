@@ -4,7 +4,8 @@ import CommentsG from '../Screens/CommentsG';
 import { Ionicons } from '@expo/vector-icons';
 import Home from '../Screens/Home';
 import AddComments from '../Screens/AddComments';
-import Detailmeal from '../Screens/Detailmeal';
+import DetailMeal from '../Screens/DetailMeal';
+import DetailComments from '../Screens/DetailComments';
 
 const Stack= createStackNavigator();
 export default function CommentStack(){
@@ -24,8 +25,12 @@ export default function CommentStack(){
         backgroundColor: '#113361',
       },headerTintColor: '#ffff'}}/>
 
-    <Stack.Screen name="Detailmeal" component={Detailmeal}
-    options={{title:'Detailmeal',headerStyle: {
+    <Stack.Screen name="DetailComments" component={DetailComments}
+    options={{title:'DetailComments',headerStyle: {
+        backgroundColor: '#113361',
+      },headerTintColor: '#ffff'}}/>
+      <Stack.Screen name="DetailMeal" component={DetailMeal}
+    options={{title:'DetailMeal',headerStyle: {
         backgroundColor: '#113361',
       },headerTintColor: '#ffff'}}/>
     

@@ -1,94 +1,91 @@
-import { View, Text,SafeAreaView,StyleSheet, FlatList, ScrollView, Alert } from 'react-native';
+import { View, Text,SafeAreaView,StyleSheet, FlatList, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Avatar, ListItem } from 'react-native-elements';
-
 import { collection,getDocs } from "firebase/firestore";
 import {firebase} from '../BBDD/bd';
 
-
+//meals
 export default function Home(props) {
     const {navigation} = props;
-    const [data , setData]= useState()
+    const [dataaa , setDataaa]= useState([])
     const todo = firebase.firestore().collection('Meals');
-    async function loadData(){
-        try{
-            const Meals = await getDocs(todo);
-            setData(Meals.docs);
-        }catch(e){
-            
-            Alert("error reinicie la app");
-        }
-
-    }
-
+    
     useEffect(()=>{
-        loadData();
+            todo.onSnapshot((querySnapshot) => {
+                const dataaa = [];
+                querySnapshot.docs.forEach((doc) => {
+                  const { name,details,price,image } = doc.data();
+                  dataaa.push({
+                    id: doc.id,
+                    name,
+                    details,
+                    price,
+                    image
+                  });
+                });
+                setDataaa(dataaa);
+              });
     },
     []);
-    function renderItem({item}){
-        return(
+  return (
+    
+    <SafeAreaView style={styles.bck}>
+   <ScrollView>
         
+        {dataaa.map((send) => {
+          
+          return (
             
-            
-            <View style={styles.container}>
-            <SafeAreaView >
-            <ScrollView >
-            <ListItem containerStyle={{backgroundColor:"#F2CF66"}}
+            <ListItem
+            containerStyle={{backgroundColor:"#F2CF66"}}
+            style={styles.container}
+              key={send.id}
+              bottomDivider
+              onPress={() => {
+                props.navigation.navigate("DetailMeal", {
+                  sendId: send.id,
+                });
+              }}
             >
-            <Avatar style={styles.image} rounded source={{uri: item.data().image}}></Avatar>
-              <ListItem.Content  >
-                <ListItem.Title>{item.data().name}</ListItem.Title>
-                <ListItem.Subtitle>{item.data().details}</ListItem.Subtitle>
-                <ListItem.Subtitle>{item.data().price}</ListItem.Subtitle>
+             <Avatar style={styles.image} rounded source={{uri: send.image}}></Avatar> 
+              
+              <ListItem.Content>
+                <ListItem.Title>{send.name}</ListItem.Title>
+                <ListItem.Subtitle>{send.details}</ListItem.Subtitle>
+                <ListItem.Subtitle>{send.price}</ListItem.Subtitle>              
               </ListItem.Content>
               <ListItem.Chevron />
             </ListItem>
-            </ScrollView>
-            </SafeAreaView>
-            </View>
-            
-            
-            
-        );
-    }
-    
-
-    
-  return (
-    
-    <SafeAreaView
-    style={styles.bck}>
-        
-   <View >
-    <Text style={styles.text}>MEALS </Text>
-    </View>
-    <FlatList 
-    style={{marginBottom:90}}
-    nestedScrollEnabled 
-    data ={data}
-    renderItem ={renderItem}
-    keyExtractor = {item=>item.id}/>
+          );
+        })}
+      </ScrollView>
     
     </SafeAreaView>
-    
-    
   );
-    
-
   }
+
+
   const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        marginLeft:20,
-        marginRight:20,
+        backgroundColor:'#a18262',
+        flex:1,
+       marginLeft:10,
+       marginRight:10,
+       marginTop:10,
         justifyContent: 'center',
-        backgroundColor: '#113361',
-        padding: 8,
+        backgroundColor: '#ecf0f1',
+
     },
     text:{
         textAlign:'center',
         fontSize:42,
-        color:"#F2CF66"
+    },
+    tittle:{
+        fontSize:18
+    },
+    subtext:{
+        fontSize:13,
+        color:'#808080',
     },
     image:{
         justifyContent:'center',
@@ -97,11 +94,8 @@ export default function Home(props) {
         height:100,
     },
     bck:{
+     
         backgroundColor: '#113361',
-    },
-    bckmeals:{
-        backgroundColor: '#F2CF66',
         
-    }
+    },
   });
-

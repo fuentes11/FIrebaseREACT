@@ -2,6 +2,7 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import Home from '../Screens/Home';
 import CommentStack from '../Screens/CommentsG';
+import DetailMeal from '../Screens/DetailMeal';
 import { Ionicons } from '@expo/vector-icons';
 
 const Stack= createStackNavigator();
@@ -18,6 +19,10 @@ export default function MealStack(){
     options={{title:'Comments',headerStyle: {
         backgroundColor: '#113361',
       },}}/>
+       <Stack.Screen name="DetailMeal" component={DetailMeal}
+    options={{title:'DetailMeal',headerStyle: {
+        backgroundColor: '#113361',
+      },headerTintColor: '#ffff'}}/>
     </Stack.Navigator>
     );
     }

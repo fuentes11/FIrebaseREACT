@@ -53,7 +53,7 @@ export default function CommentsG (props) {
                 key={send.id}
                 bottomDivider
                 onPress={() => {
-                  props.navigation.navigate("Detailmeal", {
+                  props.navigation.navigate("DetailComments", {
                     sendId: send.id,
                   });
                 }}

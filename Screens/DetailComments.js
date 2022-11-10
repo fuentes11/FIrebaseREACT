@@ -5,16 +5,13 @@ import { collection,getDocs,doc, setDoc } from "firebase/firestore";
 import {firebase} from '../BBDD/bd';
 
 
-export default function Detailmeal(props) {
+export default function DetailComments(props) {
   const {navigation} = props;
     
-    const todo = firebase.firestore().collection('Meals');
+    const todo = firebase.firestore().collection('Comments');
     const initialState = {
       id: "",
-      name: "",
-      details: "",
-      price: "",
-      image:""
+      Comments: ""
     };
   
     const [send, setSend] = useState(initialState);
@@ -24,21 +21,20 @@ export default function Detailmeal(props) {
       setSend({ ...send, [prop]: value });
     };
   
-    const getMealById = async (id) => {
+    const getCommentById = async (id) => {
       const dbRef = todo.doc(id);
       const doc = await dbRef.get();
       const send = doc.data();
       setSend({ ...send, id: doc.id });
       setLoading(false);
     };
-
-  /**
-    const deleteMeal = async () => {
+  
+    const deleteComment = async () => {
       setLoading(true)
       const dbRef = todo.doc(props.route.params.sendId);
       await dbRef.delete();
       setLoading(false)
-      props.navigation.navigate("Home");
+      props.navigation.navigate("CommentsG");
     };
   
     const openConfirmationAlert = () => {
@@ -46,7 +42,7 @@ export default function Detailmeal(props) {
         "Removing the Comment",
         "Are you sure?",
         [
-          { text: "Yes", onPress: () => deleteMeal() },
+          { text: "Yes", onPress: () => deleteComment() },
           { text: "No", onPress: () => console.log("canceled") },
         ],
         {
@@ -55,18 +51,17 @@ export default function Detailmeal(props) {
       );
     };
   
-   const updateMeal = async () => {
+   const updateComment = async () => {
       const CommentRef = todo.doc(send.id);
       await CommentRef.set({
         Comments: send.Comments
       });
       setSend(initialState);
-      props.navigation.navigate("Home");
+      props.navigation.navigate("CommentsG");
     };
-    */
   
     useEffect(() => {
-      getMealById(props.route.params.sendId);
+      getCommentById(props.route.params.sendId);
     }, []);
   
     if (loading) {
@@ -78,14 +73,25 @@ export default function Detailmeal(props) {
     }
   
     return (
-      <ScrollView style={styles.bck}>
-        <View >
-        <Avatar style={styles.image} rounded source={{uri: send.image}}></Avatar> 
+      <ScrollView style={styles.container}>
+        <View>
+          <TextInput
+            placeholder="Comment"
+            style={styles.inputGroup}
+            value={send.Comments}
+            onChangeText={(value) => handleTextChange(value, "Comments")}
+          />
         </View>
-        <View >
-        <Text style={styles.content}>{send.name}</Text> 
-           <Text style={styles.content2}>{send.details}</Text>  
-           <Text style={styles.content3}>{send.price}</Text>  
+        
+        <View style={styles.btn}>
+          <Button
+            title="Delete"
+            onPress={() => openConfirmationAlert()}
+            color="red"
+          />
+        </View>
+        <View style={styles.btn}>
+          <Button title="Update" onPress={() => updateComment()} color="#19AC52" />
         </View>
       
       </ScrollView>
@@ -117,43 +123,4 @@ export default function Detailmeal(props) {
       borderRadius:20,
       marginBottom: 7,
     },
-    image:{
-        width:300,
-        height:300,
-       alignSelf:"center",
-        borderWidth: 4,
-        borderRadius:21,
-          borderColor: "#F2CF66",
-          margin:4
-    },
-    content:{
-        color:'#F2CF66',
-        textAlign:'center',
-        fontSize:20,
-        margin:5
-    },
-    content2:{
-        textAlign:'center',
-        fontSize:15,
-        margin:5,
-        color:'#F2CF66',
-    },
-    content3:{
-        textAlign:'center',
-        fontSize:15,
-        margin:5,
-        color:'#F2CF66',
-    },
-    bck:{
-        flex: 1,
-        padding: 35,
-        backgroundColor: '#113361',
-        
-    },
-    bckmeals:{
-        backgroundColor: '#F2CF66',
-        margin:15,
-        justifyContent: 'center',
-        
-    }
   });

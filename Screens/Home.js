@@ -30,14 +30,14 @@ export default function Home(props) {
   return (
     
     <SafeAreaView style={styles.bck}>
-   <ScrollView>
+   <ScrollView style={{marginBottom:20}}>
         
         {dataaa.map((send) => {
           
           return (
             
             <ListItem
-            containerStyle={{backgroundColor:"#F2CF66"}}
+            containerStyle={{backgroundColor:"#F2CF66",borderRadius:21}}
             style={styles.container}
               key={send.id}
               bottomDivider
@@ -49,12 +49,11 @@ export default function Home(props) {
             >
              <Avatar style={styles.image} rounded source={{uri: send.image}}></Avatar> 
               
-              <ListItem.Content>
+              <ListItem.Content >
                 <ListItem.Title>{send.name}</ListItem.Title>
                 <ListItem.Subtitle>{send.details}</ListItem.Subtitle>
                 <ListItem.Subtitle>{send.price}</ListItem.Subtitle>              
               </ListItem.Content>
-              <ListItem.Chevron />
             </ListItem>
           );
         })}
@@ -67,13 +66,12 @@ export default function Home(props) {
 
   const styles = StyleSheet.create({
     container: {
-        backgroundColor:'#a18262',
-        flex:1,
+      
+       flex:1,
        marginLeft:10,
        marginRight:10,
        marginTop:10,
         justifyContent: 'center',
-        backgroundColor: '#ecf0f1',
 
     },
     text:{
@@ -88,12 +86,16 @@ export default function Home(props) {
         color:'#808080',
     },
     image:{
+        borderWidth: 4,
+        borderRadius:21,
+        borderColor: "#113361",
         justifyContent:'center',
         width:100,
         height:100,
     },
     bck:{
-     
+      
+
         backgroundColor: '#113361',
         
     },

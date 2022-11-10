@@ -1,7 +1,7 @@
 import { View, Text,SafeAreaView,StyleSheet, FlatList, TextInput, Keyboard, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Avatar, Button, ListItem } from 'react-native-elements';
-import { MaterialIcons,MaterialCommunityIcons,FontAwesome } from '@expo/vector-icons';
+import { MaterialIcons,MaterialCommunityIcons,FontAwesome,AntDesign } from '@expo/vector-icons';
 
 import { collection,getDocs,doc, setDoc } from "firebase/firestore";
 import {firebase} from '../BBDD/bd';
@@ -35,7 +35,7 @@ export default function CommentsG (props) {
         style={styles.bck}>
           
           <Button
-        style={styles.bckmeals}
+        style={{margin:20}}
         onPress={() => {
           props.navigation.navigate("AddComments");
         }}
@@ -59,12 +59,12 @@ export default function CommentsG (props) {
                 }}
                 
               >
-                <MaterialCommunityIcons name="message-arrow-right" size={30} color="black" />
-                <ListItem.Content 
+            <AntDesign name="mail" size={24} color="black" />                
+            <ListItem.Content 
                 style={styles.commentss}>
                   
-                  <ListItem.Title 
-                  >{send.Comments}</ListItem.Title>
+                  <Text> 
+                  {send.Comments}</Text>
 
                 </ListItem.Content>
               </ListItem>
@@ -105,7 +105,6 @@ export default function CommentsG (props) {
       backgroung:'#E8E8E8',
       padding: 6,
       height: 40,
-      borderRadius: 6 ,
       marginTop: 13
     },
     bck:{
@@ -114,8 +113,13 @@ export default function CommentsG (props) {
       
   },
   bckmeals:{
+    borderWidth: 4,
+    borderRadius:21,
+    borderColor: "#113361",
       backgroundColor: '#F2CF66',
-      margin:15,
+      marginLeft:15,
+      marginRight:15,
+      marginBottom:5,
       justifyContent: 'center',
       
   }

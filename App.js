@@ -13,8 +13,14 @@ import DetailComments from './Screens/DetailComments';
 import Navigation from './NAV/Navigation';
 import Index from './Screens/Index';
 import LoginController from './NAV/LoginController'
+<<<<<<< HEAD
 import { firebase } from './BBDD/bd' 
 import { useState } from 'react';
+=======
+import Cart from './Screens/Cart';
+
+
+>>>>>>> e02954d618b885169e084b22881edf7ad4820f89
 
 
 function MyStack() {
@@ -57,6 +63,11 @@ function MyStack() {
         name="Index"
         component={Index}
         options={{ title: "Index" }}
+      />
+      <Stack.Screen
+        name="Cart"
+        component={Cart}
+        options={{ title: "Cart" }}
       />
       
     </Stack.Navigator>

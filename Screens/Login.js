@@ -13,7 +13,6 @@ import{ getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} fro
 import{ initializeApp } from 'firebase/app';
 import{ firebaseConfig } from '../BBDD/bd';
 import { useNavigation } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 //constante para iniciar el spinner y mostar la carga de los datos
     
 const Login =({navigation}) => {

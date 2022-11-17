@@ -14,8 +14,17 @@ import Navigation from './NAV/Navigation';
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Index from './Screens/Index';
 import LoginController from './NAV/LoginController'
-import { firebase } from './BBDD/bd' 
-import { useState } from 'react';
+import Cart from './Screens/Cart';
+import FilterResult from './Screens/FilterResult';
+import FilterList from './Screens/FilterList';
+
+function TabBarIcon({name, color}){
+  return(
+      <AntDesign size={30} style={{marginBottom: -3}} name={name} color={color}/>
+      
+  );
+}
+
 
 function MyStack(props) {
   const {navigation} = props;
@@ -54,39 +63,10 @@ function MyStack(props) {
         options={{ title: "Comments" }}
       />
       
-     
-      <Stack.Screen
-        name="Detailmeal"
-        component={Detailmeal}
-        options={{ title: "Detailmeal" }}
-      />
-
-      <Stack.Screen
-        name="DetailComments"
-        component={DetailComments}
-        options={{ title: "DetailComments" }}
-      />
-       
-      <Stack.Screen
-        name="Index"
-        component={Index}
-        options={{ title: "Index" }}
-      />
-      <Stack.Screen
-        name="Cart"
-        component={Cart}
-        options={{ title: "Cart"}}
-      />
       <Stack.Screen
         name="DetailMeal"
         component={DetailMeal}
-        options={{ title: "DetailMeal",headerStyle: {
-          backgroundColor: '#113361',
-          
-        },headerTintColor: '#ffff',
-        headerRight: () => (
-          <AntDesign name="shoppingcart" size={40} color="#ffff" onPress={() => {props.navigation.navigate("Cart")}}/>
-          ),}}
+        options={{ title: "DetailMeal" }}
       />
 
       <Stack.Screen
@@ -94,7 +74,11 @@ function MyStack(props) {
         component={DetailComments}
         options={{ title: "DetailComments" , headerShown: false}}/>
       
-       
+      <Stack.Screen
+      name='Cart'
+      component={Cart}
+      options={{ title: "Cart" }}
+      />
       
        <Stack.Screen
         name="FilterResult"
@@ -111,11 +95,13 @@ function MyStack(props) {
     </Stack.Navigator>
   );
 };
-export default function App() {
+export default function App(props) {
+
   return (
+    
     <NavigationContainer>
        
-       <Navigation/>
+       <MyStack/>
     </NavigationContainer>
     
   );

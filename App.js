@@ -14,22 +14,8 @@ import Navigation from './NAV/Navigation';
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Index from './Screens/Index';
 import LoginController from './NAV/LoginController'
-<<<<<<< HEAD
 import { firebase } from './BBDD/bd' 
 import { useState } from 'react';
-=======
-import Cart from './Screens/Cart';
-import FilterResult from './Screens/FilterResult';
-import FilterList from './Screens/FilterList';
-
-function TabBarIcon({name, color}){
-  return(
-      <AntDesign size={30} style={{marginBottom: -3}} name={name} color={color}/>
-      
-  );
-}
-
->>>>>>> e02954d618b885169e084b22881edf7ad4820f89
 
 function MyStack(props) {
   const {navigation} = props;
@@ -135,7 +121,7 @@ export default function App() {
   );
   
 };
-}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

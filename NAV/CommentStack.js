@@ -17,22 +17,6 @@ export default function CommentStack(){
         backgroundColor: '#113361',
       },headerTintColor: '#ffff'}}/>
 
-    <Stack.Screen name="Home" component={Home}
-    options={{title:'Home'}}/>
-
-    <Stack.Screen name="AddComments" component={AddComments}
-    options={{title:'AddComments',headerStyle: {
-        backgroundColor: '#113361',
-      },headerTintColor: '#ffff'}}/>
-
-    <Stack.Screen name="DetailComments" component={DetailComments}
-    options={{title:'DetailComments',headerStyle: {
-        backgroundColor: '#113361',
-      },headerTintColor: '#ffff'}}/>
-      <Stack.Screen name="DetailMeal" component={DetailMeal}
-    options={{title:'DetailMeal',headerStyle: {
-        backgroundColor: '#113361',
-      },headerTintColor: '#ffff'}}/>
     
     </Stack.Navigator>
     );

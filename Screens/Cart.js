@@ -1,93 +1,94 @@
-import React, { Component } from 'react';
-import { Avatar, ListItem } from 'react-native-elements';
-import { StyleSheet, Text, View, ActivityIndicator,ScrollView } from 'react-native';
+import { View, Text,SafeAreaView,StyleSheet, FlatList, TextInput, Keyboard, ScrollView,ActivityIndicator,RefreshControl } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Avatar, Button, Icon, ListItem, } from 'react-native-elements';
+import { AntDesign  } from '@expo/vector-icons';
+import { collection,getDocs,doc, setDoc } from "firebase/firestore";
 import {firebase} from '../BBDD/bd';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import * as Linking from 'expo-linking';
 
-export default class Cart extends Component {
-
-  constructor() {
-    super();
-    this.firestoreRef = firebase.firestore().collection('Meals');
-    this.state = {
-      isLoading: true,
-      userArr: []
-    };
-  }
-
-  componentDidMount() {
-    this.unsubscribe = this.firestoreRef.onSnapshot(this.getMealById);
-  }
-
-  componentWillUnmount(){
-    this.unsubscribe();
-  }
-
-  getMealById = (querySnapshot) => {
-    const userArr = [];
-    querySnapshot.forEach((send) => {
-      const { cantidad, details, name, price, subTotal, image } = send.data();
-      userArr.push({
-        key: send.id,
-        send,
-        cantidad,
-        details,
-        name,
-        price,
-        subTotal,
-        image,
-      });
-    });
-    this.setState({
-      userArr,
-      isLoading: false,
-   });
-  }
-
-render(){
-  if(this.state.isLoading){
-    return(
-      <View style={styles.preloader}>
-        <ActivityIndicator size="large" color="#9E9E9E"/>
-      </View>
-    )
-  }   
-
-return (
-    <ScrollView styles={{marginBottom:100}}>
-<View style={styles.container}>
-
-{
-        this.state.userArr.map((item, i) => {
-          return (
-            
-<View style={styles.cardProducto}>
-        <View style={styles.card}>
-          <View style={styles.imagenRow}>
-            <View style={styles.imagen}>
-            <Avatar style={styles.imagen} rounded source={{uri: item.image}}></Avatar> 
-            </View>
-            <View style={styles.tituloColumnColumn}>
-              <View style={styles.tituloColumn}>
-        <Text style={styles.titulo}>{item.name}</Text>
-                <Text style={styles.descripcion}>{item.details}</Text>
-          <Text style={styles.precio}>${item.price}</Text>
-              </View>
-              <Text style={styles.agregar}>Agregar</Text>
-            </View>
-          </View>
-        </View>
-      </View>
-      
-          )
+function Sending(Carrito){
+  var Factura="Pedido:\n";
+  var TotalFinal=0;
+  Carrito.map((product,i)=>{
+    Factura=Factura+""+"\n Producto :"+product.name+" "+ "\n cantidad :"+product.cantidad+"\n Precio$"+product.price+"\n"
+    TotalFinal+=product.price;
   })
+  Factura+='\n Total a pagar: $'+ TotalFinal
+  return(Factura)
 }
 
-</View>
+export default function Cart(props) {
+  const {navigation} = props;
+  const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  }
+  const [refreshing, setRefreshing] = React.useState(false);
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
+  let url = "whatsapp://send?text="+ Sending(global.Cart)+ "&phone=50375169807"
+  
+
+return (
+  
+  <SafeAreaView style={styles.bck}>
+  <ScrollView 
+  refreshControl={
+    <RefreshControl
+      refreshing={refreshing}
+      onRefresh={onRefresh}
+    />
+  }
+  >
+{
+       global.Cart.map((product,i) =>{
+
+          return (
+            
+<View style={styles.cardProducto} key={i}>
+        <View style={styles.card}>
+          <View style={styles.imagenRow}>
+            <View >
+              <Avatar style={styles.imagen} rounded source={{uri: product.image}}></Avatar> 
+            </View>
+            
+            <View style={styles.tituloColumnColumn}>
+              <View style={styles.tituloColumn}>
+                <Text style={styles.titulo}>{product.name}</Text>
+                <Text style={styles.descripcion}>Cantidad:{product.cantidad}</Text>
+                <Text style={styles.precio}>TOTAL:${product.price}</Text>
+              </View> 
+              <View style={styles.text}>
+              <Button title={"ELiminar"} onPress={() => {global.Cart.splice(i, 1) }
+}/>
+            </View>
+            </View>
+            </View>
+            
+            
+          </View>
+          
+        </View>
+      
+          )
+          
+            
+          
+  })
+}
+<Button 
+style={styles.Button}
+title={"Enviar pedido"} onPress={() => {Linking.openURL(url),global.Cart=[]
+}}/>
 </ScrollView>
+ </SafeAreaView>
+
 );
 }
 
-}
+
 
 const styles = StyleSheet.create({
 container: {
@@ -98,20 +99,28 @@ justifyContent: 'center',
 },
 cardProducto: {
     width: 341,
-    height: 121,
+    height: 122,
     marginTop: 40,
+    backgroundColor: '#F2CF66',
+    borderRadius:21,
+    borderColor: "#113361",
     marginLeft: 9
   },
   card: {
     height: 140,
-    backgroundColor: "rgba(188,173,173,1)",
-    borderRadius: 15
+    backgroundColor: '#F2CF66',
+    borderRadius:21,
+    borderColor: "#113361",
+    justifyContent:'center',
   },
   imagen: {
     width: 71,
     height: 78,
-    backgroundColor: "#E6E6E6",
-    marginTop: 1
+    borderWidth: 4,
+    borderRadius:21,
+    borderColor: "#113361",
+    justifyContent:'center',
+    display:'block',
   },
   titulo: {
     color: "#121212",
@@ -145,5 +154,21 @@ cardProducto: {
     marginTop: 21,
     marginLeft: 12,
     marginRight: 124
-  }
+  },
+  bck:{
+    width:'100%',
+    height:'100%',
+     backgroundColor: '#113361',
+ },
+ text:{
+  backgroundColor:'#ffff',
+  display:"flex",
+  alignSelf:'flex-end',
+  alignContent:'center',
+  textAlign:"right"
+ },
+ Button:{
+  marginTop:50
+ }
+
 });

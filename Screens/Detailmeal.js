@@ -1,17 +1,25 @@
 import { View, Text,SafeAreaView,StyleSheet, FlatList, TextInput, Keyboard, ScrollView,ActivityIndicator,Alert } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import { Avatar, Button, Icon, ListItem } from 'react-native-elements';
+import React, { useEffect, useRef, useState } from 'react';
+import { Avatar, Button, Icon, ListItem,Image } from 'react-native-elements';
 import { AntDesign  } from '@expo/vector-icons';
-import { collection,getDocs,doc, setDoc } from "firebase/firestore";
 import {firebase} from '../BBDD/bd';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import ActionSheet from 'react-native-actions-sheet';
 
 
 export default function DetailMeal(props) {
   const {navigation} = props;
     
+    let actionSheet = useRef();
+    let optionarray = [
+      'Option 1', 'Option 2','Cancel'
+    ]
+    const showActionSheet=()=>{
+      actionSheet.current.show();
+    }
     const todo = firebase.firestore().collection('Meals');
     const [count,setCount]=useState(1);
+    
     const initialState = {
       id: "",
       name: "",
@@ -92,23 +100,60 @@ export default function DetailMeal(props) {
         </View>
         <View>
           <TouchableOpacity
-          
           style={styles.add}
-            
             onPress={()=>{ 
-              props.navigation.navigate("Cart", {
-                sendId: send.id,
-              });
-
+              showActionSheet(),
+              global.Cart.push(
+                {name:send.name,cantidad:count,price:(parseFloat(send.price)*count),image:send.image,id:send.id}
+                )               
             }}
           > 
           <Text style={styles.content4}
           >Add to cart</Text>
           </TouchableOpacity>
+          <ActionSheet
+      ref={actionSheet}
+      
+      containerStyle={{
+        borderTopLeftRadius:25,
+        borderTopRightRadius:25
+      }}
+      indicatorStyle={{
+        width:100
+      }}
+      gestureEnabled={true}>
+      <View
+        style={{
+          height:300,
+          width:'100%',
+          alignItems:'center',
+        }}>
           
+          <Image 
+        
+        source={require('../assets/gif.gif')} 
+        style={{
+        width: 200,
+        height: 200,}}
+    />     
+    <View>
+        <Text style={{
+          fontSize:25,
+          marginLeft:20,
+          marginRight:20,
+          marginBottom:0,
+          textAlign:'center',
+        }}>¡¡LISTO😋!!</Text>
+</View>
+    
+      </View>
+      
           
-        </View>
+    </ActionSheet>
 
+
+        </View>
+           
       <View style={styles.container}>
 
 
@@ -128,7 +173,8 @@ export default function DetailMeal(props) {
             
               setCount(parseInt(count)+1);
           }}      
-          ><AntDesign name="pluscircle" size={24} color="#F2CF66" />
+          >
+            <AntDesign name="pluscircle" size={24} color="#F2CF66" />
           </TouchableOpacity>
         
           

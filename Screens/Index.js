@@ -5,7 +5,7 @@ import Navigation from '../NAV/Navigation';
 export default function Index(){
  return(
  <NavigationContainer>
- <Navigation></Navigation>
+ <Navigation/>
  </NavigationContainer>
  );
 }

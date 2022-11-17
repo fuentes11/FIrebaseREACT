@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { Avatar, Button, ListItem } from 'react-native-elements';
 import { MaterialIcons,MaterialCommunityIcons,FontAwesome,AntDesign } from '@expo/vector-icons';
 
-import { collection,getDocs,doc, setDoc } from "firebase/firestore";
 import {firebase} from '../BBDD/bd';
 
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -31,8 +30,9 @@ export default function CommentsG (props) {
       }, []);
     
       return (
+        <View style={styles.bck}>
         <SafeAreaView 
-        style={styles.bck}>
+        >
           
           <Button
         style={{margin:20}}
@@ -42,7 +42,7 @@ export default function CommentsG (props) {
         title="Create new comment"
       />
       
-        <ScrollView style={{marginBottom:100}}>
+        <ScrollView style={{marginBottom:20}}>
         
           {dataa.map((send) => {
             
@@ -63,7 +63,7 @@ export default function CommentsG (props) {
             <ListItem.Content 
                 style={styles.commentss}>
                   
-                  <Text> 
+                  <Text > 
                   {send.Comments}</Text>
 
                 </ListItem.Content>
@@ -74,6 +74,7 @@ export default function CommentsG (props) {
         </ScrollView>
         
         </SafeAreaView>
+        </View>
       );
   
   }
@@ -109,7 +110,8 @@ export default function CommentsG (props) {
       marginTop: 13
     },
     bck:{
-     
+     width:'100%',
+     height:'100%',
       backgroundColor: '#113361',
       
   },

@@ -27,9 +27,10 @@ export default function Home(props) {
               });
     },
     []);
+    global.Cart=[];
   return (
-    
-    <SafeAreaView style={styles.bck}>
+    <View style={styles.bck}>
+    <SafeAreaView >
    <ScrollView style={{marginBottom:20}}>
         
         {dataaa.map((send) => {
@@ -60,6 +61,7 @@ export default function Home(props) {
       </ScrollView>
     
     </SafeAreaView>
+    </View>
   );
   }
 
@@ -95,9 +97,9 @@ export default function Home(props) {
         height:100,
     },
     bck:{
-      
-
-        backgroundColor: '#113361',
-        
-    },
+      width:'100%',
+      height:'100%',
+       backgroundColor: '#113361',
+       
+   }
   });

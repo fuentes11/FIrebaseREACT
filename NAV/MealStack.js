@@ -4,30 +4,29 @@ import Home from '../Screens/Home';
 import CommentStack from '../Screens/CommentsG';
 import DetailMeal from '../Screens/DetailMeal';
 import Cart from '../Screens/Cart';
-import { Ionicons } from '@expo/vector-icons';
-
+import { AntDesign } from '@expo/vector-icons'; 
+import { Button } from 'react-native-elements';
 const Stack= createStackNavigator();
-export default function MealStack(){
+
+
+export default function MealStack(props){
+  const {navigation} = props;
     return(
     <Stack.Navigator 
     >
     
     <Stack.Screen name="Home" component={Home}
-    options={{title:'Home',headerStyle: {
+      options={{ title:'Home',headerStyle: {
         backgroundColor: '#113361',
-      },headerTintColor: '#ffff'}}/>
-    <Stack.Screen name="CommentsG" component={CommentStack}
-    options={{title:'Comments',headerStyle: {
-        backgroundColor: '#113361',
-      },}}/>
-       <Stack.Screen name="DetailMeal" component={DetailMeal}
-    options={{title:'DetailMeal',headerStyle: {
-        backgroundColor: '#113361',
-      },headerTintColor: '#ffff'}}/>
-       <Stack.Screen name="Cart" component={Cart}
-    options={{title:'Cart',headerStyle: {
-        backgroundColor: '#113361',
-      },headerTintColor: '#ffff'}}/>
+        
+      },headerTintColor: '#ffff',
+      headerRight: () => (
+        <AntDesign name="shoppingcart" size={40} color="#ffff" onPress={() => {props.navigation.navigate("Cart")}}/>
+        ),
+      
+        
+    }}/>
+   
     </Stack.Navigator>
 
     );

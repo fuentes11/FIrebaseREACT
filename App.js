@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React,{ useEffect} from 'react';
 import { StyleSheet, Text, View, SafeAreaView} from 'react-native';
-
 
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
@@ -15,6 +14,10 @@ import Navigation from './NAV/Navigation';
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Index from './Screens/Index';
 import LoginController from './NAV/LoginController'
+<<<<<<< HEAD
+import { firebase } from './BBDD/bd' 
+import { useState } from 'react';
+=======
 import Cart from './Screens/Cart';
 import FilterResult from './Screens/FilterResult';
 import FilterList from './Screens/FilterList';
@@ -26,12 +29,14 @@ function TabBarIcon({name, color}){
   );
 }
 
+>>>>>>> e02954d618b885169e084b22881edf7ad4820f89
 
 function MyStack(props) {
   const {navigation} = props;
 
   const Stack = createStackNavigator();
   return (
+    
     <Stack.Navigator
     screenOptions={{
       headerStyle: {
@@ -63,6 +68,19 @@ function MyStack(props) {
         options={{ title: "Comments" }}
       />
       
+     
+      <Stack.Screen
+        name="Detailmeal"
+        component={Detailmeal}
+        options={{ title: "Detailmeal" }}
+      />
+
+      <Stack.Screen
+        name="DetailComments"
+        component={DetailComments}
+        options={{ title: "DetailComments" }}
+      />
+       
       <Stack.Screen
         name="Index"
         component={Index}
@@ -107,16 +125,17 @@ function MyStack(props) {
     </Stack.Navigator>
   );
 };
-export default function App(props) {
-
+export default function App() {
   return (
     <NavigationContainer>
        
-       <MyStack/>
+       <Navigation/>
     </NavigationContainer>
+    
   );
+  
 };
-
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,

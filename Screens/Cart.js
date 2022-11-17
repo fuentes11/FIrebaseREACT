@@ -28,7 +28,7 @@ export default function Cart(props) {
     setRefreshing(true);
     wait(2000).then(() => setRefreshing(false));
   }, []);
-  let url = "whatsapp://send?text="+ Sending(global.Cart)+ "&phone=50375169807"
+  let url = "whatsapp://send?text="+ Sending(global.Cart)+ "&phone=50374819876"
   
 
 return (

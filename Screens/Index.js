@@ -8,4 +8,4 @@ export default function Index(){
  <Navigation/>
  </NavigationContainer>
  );
-}
+} 

@@ -92,7 +92,6 @@ export default function CommentsG (props) {
     },
     image:{
         justifyContent:'center',
-        display:'block',
         width:100,
         height:100,
     },

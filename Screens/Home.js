@@ -92,7 +92,6 @@ export default function Home(props) {
         borderRadius:21,
         borderColor: "#113361",
         justifyContent:'center',
-        display:'block',
         width:100,
         height:100,
     },

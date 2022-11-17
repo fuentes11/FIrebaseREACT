@@ -8,7 +8,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import CommentsG from './Screens/CommentsG';
 import Home from './Screens/Home';
 import AddCommentsd from './Screens/AddComments';
-import DetailMeal from './Screens/DetailMeal';
+import DetailMeal from './Screens/Detailmeal';
 import DetailComments from './Screens/DetailComments';
 import Navigation from './NAV/Navigation';
 import AntDesign from 'react-native-vector-icons/AntDesign'
@@ -101,7 +101,7 @@ export default function App(props) {
     
     <NavigationContainer>
        
-       <MyStack/>
+       <LoginController/>
     </NavigationContainer>
     
   );

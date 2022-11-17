@@ -4,6 +4,7 @@ import { Component } from 'react';
 import { ScrollView ,StyleSheet, Text, View, Button, TextInput, Image, TouchableOpacity, CheckBox,  } from 'react-native';
 import { useState } from 'react';
 import Spinner from 'react-native-loading-spinner-overlay';
+import {isEmpty} from 'lodash';
 import { Checkbox } from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';//import icons(Importación de iconos)
 import { RFPercentage } from 'react-native-responsive-fontsize';//library to get responsive fonts(Librería para tener un tamaño responsivo en el texto)
@@ -15,7 +16,8 @@ import { useNavigation } from '@react-navigation/native';
 
 //constante para iniciar el spinner y mostar la carga de los datos
     
-const Login =({navigation}) => {
+const Register =({navigation}) => {
+  
   const [showhide, setShowhide] = useState(true);//Variable to protect the password(variable para mostrar y esconder la contraseña)
   const [checked, setChecked] = useState(false);//variable for checkbox to remember user email(variable para checkbox para recordar correo de usuario)
   const [loading, setLoading] = useState(false);//variable for loading spinner(variable para el spinner de loading)
@@ -26,10 +28,10 @@ const Login =({navigation}) => {
       setLoading(false);
     }, 3000);
   };
-     const [user, setUser] = useState('');//Variable for get the input user(variable para capturar el input de usuario)
-      validateEmail = (user) => {
+     const [email, setEmail] = useState('');//Variable for get the input user(variable para capturar el input de usuario)
+      validateEmail = (email) => {
         var re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
-        return re.test(user);
+        return re.test(email);
         };
       const [password, setPassword] = useState('');//Variable for get the input password(variable para capturar el input de contraseña)
       validatePassword = (password) => {
@@ -37,34 +39,28 @@ const Login =({navigation}) => {
         return res.test(password);
         };
 
-        registerUser = async(user,password) =>{
-          await firebase.auth().createUserWithEmailAndPassword(user,password)
-          .then(() =>{
-            firebase.auth().currentUser.sendEmailVerification({
-              handleCodeInApp: true,
-              url:'restaurantdb-12bb4.firebaseapp.com'
-
+        const handleCreateAccount= ()=>{
+          //validaciones
+            if(isEmpty(email) || isEmpty(password) ){
+              setError("Existen campos vacios")
+            } else if(!validadoemail(email)) {
+              setError("El formato del email es incorrecto")
+            }else if(!validandocontraseña(password)){
+              setError("contraseña debe contener al entre 8 y 16 caracteres entre ellas mayusculas, minusculas y numeros (no se aceptan simbolos)")
+            } else {
+          //creaion de cuenta
+            createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+            console.log('Cuenta creada!')
+            Alert.alert('Tu cuenta ha sido creada '+email)
+            const user = userCredential.user;
+            console.log(user)})
+            .catch(error =>{
+              console.log(error)
+              setError("Algo salio mal, por favor verifique su informacion")
             })
-            .then(()=>{
-              alert('Verification email sent')
-            }).catch((error) => {
-              
-            }).then(()=>{
-              firebase.firestore().collection('users')
-              .doc(firebase.auth().currentUser.uid)
-              .set({
-                email,
-              })
-            })
-            .catch((error) =>{
-              alert(error.message)
-            })
-          })
-          .catch((error) =>{
-            alert(error.message)
-          })
+          }
         }
-    
 
 
   return(
@@ -81,7 +77,7 @@ const Login =({navigation}) => {
                     />              
                     <Image source={require('../assets/LolOlgo.png')} style={{borderRadius:15,height: 200, width: 230, margin:0,}} />
                     <View style={{width:'80%',}}>
-                      <TextInput style={styles.inputTxt} placeholder='Correo electronico' onChangeText={user => setUser(user)} defaultValue={user} />
+                      <TextInput style={styles.inputTxt} placeholder='Correo electronico' onChangeText={email => setEmail(email)} defaultValue={email} />
                     </View>
                     <View style={styles.passwordview}>
                       <TouchableOpacity onPress={() =>{
@@ -91,22 +87,7 @@ const Login =({navigation}) => {
                       <TextInput style={styles.inputTxt2} placeholder='Contraseña' onChangeText={password => setPassword(password)} defaultValue={password} secureTextEntry={showhide}/>
     
                     </View>  
-                    <Button  title='Login' color={'#F2CF66'} onPress={() => {
-                                                   if(validateEmail(user)
-                                                   ){
-                                                     registerUser(user,password)
-                                                     startLoading();
-                                                     navigation.navigate('Main');
-                                               }
-                                               else{
-                                                 alert("incorrecto")
-                                               }
-            
-
-                
-                      setUser('');
-                      setPassword('');
-                    }}/>
+                    <Button  title='Login' color={'#F2CF66'} onPress={() => {navigation.navigate('Main')}} />
                 </View>
             </ScrollView>
         );
@@ -159,5 +140,5 @@ const styles = StyleSheet.create({
     },
   });
 
-export default Login ;
+export default Register ;
 

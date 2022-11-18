@@ -1,7 +1,7 @@
 import { View, Text,SafeAreaView,StyleSheet, FlatList, TextInput, Keyboard, ScrollView,ActivityIndicator,RefreshControl } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Avatar, Button, Icon, ListItem, } from 'react-native-elements';
-import { AntDesign  } from '@expo/vector-icons';
+import { MaterialCommunityIcons,FontAwesome,Entypo  } from '@expo/vector-icons';
 import { collection,getDocs,doc, setDoc } from "firebase/firestore";
 import {firebase} from '../BBDD/bd';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -53,20 +53,17 @@ return (
             <View >
               <Avatar style={styles.imagen} rounded source={{uri: product.image}}></Avatar> 
             </View>
-            
             <View style={styles.tituloColumnColumn}>
               <View style={styles.tituloColumn}>
                 <Text style={styles.titulo}>{product.name}</Text>
                 <Text style={styles.descripcion}>Cantidad:{product.cantidad}</Text>
                 <Text style={styles.precio}>TOTAL:${product.price}</Text>
-              </View> 
-              <View style={styles.text}>
-              <Button title={"ELiminar"} onPress={() => {global.Cart.splice(i, 1) }
-}/>
+            </View> 
             </View>
+            <TouchableOpacity style={styles.text} onPress={() => {global.Cart.splice(i, 1),setRefreshing(true) }}>
+            <MaterialCommunityIcons name="delete-forever" size={60} color="black"  />             
+             </TouchableOpacity>
             </View>
-            </View>
-            
             
           </View>
           
@@ -78,10 +75,14 @@ return (
           
   })
 }
-<Button 
+<TouchableOpacity 
 style={styles.Button}
-title={"Enviar pedido"} onPress={() => {Linking.openURL(url),global.Cart=[]
-}}/>
+onPress={() => {Linking.openURL(url),global.Cart=[]
+}}>
+  <Text>Enviar Pedido <FontAwesome name="send-o" size={24} color="black" /></Text>
+  
+
+</TouchableOpacity>
 </ScrollView>
  </SafeAreaView>
 
@@ -98,7 +99,7 @@ alignItems: 'center',
 justifyContent: 'center',
 },
 cardProducto: {
-    width: 341,
+    width: 400,
     height: 122,
     marginTop: 40,
     backgroundColor: '#F2CF66',
@@ -134,7 +135,6 @@ cardProducto: {
   precio: {
     color: "#121212",
     marginTop: 4,
-    marginLeft: 39
   },
   tituloColumn: {
     width: 130
@@ -145,7 +145,7 @@ cardProducto: {
     marginLeft: 22
   },
   tituloColumnColumn: {
-    width: 93,
+    width: 200,
     marginLeft: 41
   },
   imagenRow: {
@@ -161,14 +161,22 @@ cardProducto: {
      backgroundColor: '#113361',
  },
  text:{
-  backgroundColor:'#ffff',
-  display:"flex",
   alignSelf:'flex-end',
   alignContent:'center',
-  textAlign:"right"
- },
+  justifyContent:'flex-end'
+  
+},
  Button:{
-  marginTop:50
+  marginTop:50,
+  borderWidth: 4,
+  borderRadius:21,
+  borderColor: "#113361",
+  justifyContent:'center',
+  alignItems:'center',
+  width:200,
+  backgroundColor:'#F2CF66',
+  height:50,
+  alignSelf: 'center',
  }
 
 });

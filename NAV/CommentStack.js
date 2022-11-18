@@ -4,7 +4,6 @@ import CommentsG from '../Screens/CommentsG';
 import { Ionicons } from '@expo/vector-icons';
 import Home from '../Screens/Home';
 import AddComments from '../Screens/AddComments';
-import DetailMeal from '../Screens/Detailmeal';
 import DetailComments from '../Screens/DetailComments';
 
 const Stack= createStackNavigator();
@@ -13,7 +12,8 @@ export default function CommentStack(){
     <Stack.Navigator>
     
     <Stack.Screen name="CommentsG" component={CommentsG}
-    options={{title:'Comments',headerStyle: {
+    options={{title:'Comments',    headerLeft: null
+    ,headerStyle: {
         backgroundColor: '#113361',
       },headerTintColor: '#ffff'}}/>
 

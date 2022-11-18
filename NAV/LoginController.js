@@ -9,28 +9,30 @@ import Register from '../Screens/Register';
 
 
 import { LogBox } from 'react-native';
+import Navigation from '../NAV/Navigation';
 //NativeStackNavigator object creation(Creación de elemento tipo StackNavigator)
 const Stack = createNativeStackNavigator();
 
 //Controller to the navigation between client and detail screen(Controlador para la navegación entre las pantallas Clientes y de Detalles)
-function LoginController() {
+export default function LoginController() {
   LogBox.ignoreLogs(['Warning: Async Storage has been extracted from react-native core']);
   return (
     
-      <Stack.Navigator initialRouteName='Login' 
+      <Stack.Navigator  
       screenOptions={{
         headerTintColor:'#fff',
         headerStyle:{
           backgroundColor: '#394263',
         },
       }}>
-        <Stack.Screen name="Login" component={Login} options={{headerShown:false}}/>
+        <Stack.Screen name="Login" component={Login} options={{headerShown:false,}}/>
         <Stack.Screen name="Main" component={Home} options={{headerShown:false}}/>
+        <Stack.Screen name="Nav" component={Navigation} options={{headerShown:false}}/>
         <Stack.Screen name="Register" component={Register} options={{headerShown:false}}/>
       </Stack.Navigator>
       
   );
 }
 
-export default LoginController;
+ 
 

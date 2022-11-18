@@ -2,6 +2,7 @@ import { View, Text,SafeAreaView,StyleSheet, FlatList, TextInput, Keyboard, Scro
 import React, { useEffect, useRef, useState } from 'react';
 import { Avatar, Button, Icon, ListItem,Image } from 'react-native-elements';
 import { AntDesign  } from '@expo/vector-icons';
+import LottieView from 'lottie-react-native';
 import {firebase} from '../BBDD/bd';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ActionSheet from 'react-native-actions-sheet';
@@ -131,7 +132,7 @@ export default function DetailMeal(props) {
           
           <Image 
         
-        source={require('../assets/gif.gif')} 
+        source={require('../assets/cart.gif')} 
         style={{
         width: 200,
         height: 200,}}

@@ -1,22 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
 import React,{ useEffect} from 'react';
 import { StyleSheet, Text, View, SafeAreaView} from 'react-native';
-
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from "@react-navigation/stack";
 import CommentsG from './Screens/CommentsG';
 import Home from './Screens/Home';
 import AddCommentsd from './Screens/AddComments';
-import DetailMeal from './Screens/Detailmeal';
+import DetailMeal from './Screens/DetailMeal';
 import DetailComments from './Screens/DetailComments';
 import Navigation from './NAV/Navigation';
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Index from './Screens/Index';
 import LoginController from './NAV/LoginController'
 import Cart from './Screens/Cart';
-import FilterResult from './Screens/FilterResult';
-import FilterList from './Screens/FilterList';
+
+import Login from './Screens/Login';
 
 function TabBarIcon({name, color}){
   return(
@@ -43,6 +42,12 @@ function MyStack(props) {
       },
     }}
     >
+      <Stack.Screen
+        name="LoginController"
+        component={LoginController}
+        options={{ title: "",headerShown:false,    headerLeft: null
+      }}
+      />
       <Stack.Screen
         name="Navigation"
         component={Navigation}
@@ -77,19 +82,10 @@ function MyStack(props) {
       <Stack.Screen
       name='Cart'
       component={Cart}
-      options={{ title: "Cart" }}
+      options={{ title:"Cart" }}
       />
       
-       <Stack.Screen
-        name="FilterResult"
-        component={FilterResult}
-        options={{ title: "FilterResult" }}
-      />
-      <Stack.Screen
-        name="FilterList"
-        component={FilterList}
-        options={{ title: "FilterList" }}
-      />
+      
       
       
     </Stack.Navigator>
@@ -100,8 +96,7 @@ export default function App(props) {
   return (
     
     <NavigationContainer>
-       
-       <LoginController/>
+       <MyStack/>
     </NavigationContainer>
     
   );

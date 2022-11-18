@@ -6,7 +6,6 @@ import { MaterialIcons,FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MealStack from './MealStack';
 import CommentStack from './CommentStack';
-import FilterNavigation from './FilterNavigation';
 const Tab = createBottomTabNavigator();
 
 export default function Navigation(){
@@ -27,10 +26,7 @@ export default function Navigation(){
         <FontAwesome name="comments" color={'#F2CF66'} size={size} />
       ), }}/>
 
-      <Tab.Screen name= "Filter" component={FilterNavigation} options={{ title:'Filter',headerShown:false ,
-        tabBarIcon: ({ color, size }) => (
-          <FontAwesome name="search" size={24} color="#F2CF66" />
-      ), }}/>
+      
         </Tab.Navigator>
     
   );

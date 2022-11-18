@@ -2,9 +2,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
  import 'firebase/compat/firestore'; 
 
-
-
-const firebaseConfig = {
+ const firebaseConfig = {
   apiKey: "AIzaSyBW8TegsYdSngQc9qsrmkvccm4GLBqUzAk",
   authDomain: "restaurantdb-12bb4.firebaseapp.com",
   projectId: "restaurantdb-12bb4",

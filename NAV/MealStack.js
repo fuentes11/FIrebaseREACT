@@ -2,8 +2,6 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import Home from '../Screens/Home';
 import CommentStack from '../Screens/CommentsG';
-import DetailMeal from '../Screens/Detailmeal';
-import Cart from '../Screens/Cart';
 import { AntDesign } from '@expo/vector-icons'; 
 import { Button } from 'react-native-elements';
 const Stack= createStackNavigator();
@@ -16,7 +14,8 @@ export default function MealStack(props){
     >
     
     <Stack.Screen name="Home" component={Home}
-      options={{ title:'Home',headerStyle: {
+      options={{ title:'Home',    headerLeft: null
+,      headerStyle: {
         backgroundColor: '#113361',
         
       },headerTintColor: '#ffff',

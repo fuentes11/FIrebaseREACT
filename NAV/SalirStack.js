@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import salir from '../Screens/Salir';
+import Salir from '../Screens/Salir';
 import CommentStack from '../Screens/CommentsG';
 import { AntDesign } from '@expo/vector-icons'; 
 import { Button } from 'react-native-elements';
@@ -13,10 +13,8 @@ export default function SalirStack(props){
     <Stack.Navigator 
     >
     
-    <Stack.Screen name="Salir" component={salir}
-      options={{ title:'Salir'
-      
-        
+    <Stack.Screen name="Salir" component={Salir}
+      options={{ title:'Salir'  
     }}/>
    
     </Stack.Navigator>

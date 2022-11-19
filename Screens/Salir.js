@@ -10,13 +10,13 @@ import{ getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} fro
 import {firebase} from '../BBDD/bd'
 import Navigation from '../NAV/Navigation';
 
-function Salir({navigation}) {
-
-  const SignOut = () => {
+const Salir=({navigation})=>{
+  const auth = getAuth()
+    const SignOut = () => {
     auth
       .signOut()
       .then(() => {
-        navigation.replace("Iniciar")
+        navigation.replace("Login")
       })
       .catch(error => alert(error.message))
   }
@@ -24,7 +24,7 @@ function Salir({navigation}) {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={SignOut()}>
-        <Text>Salir</Text>
+        <Text>cerrar sesion</Text>
       </TouchableOpacity>
     </View>
   )

@@ -6,7 +6,7 @@ import { MaterialIcons,FontAwesome,Entypo} from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MealStack from './MealStack';
 import CommentStack from './CommentStack';
-import Salir from './SalirStack';
+import SalirStack from './SalirStack';
 const Tab = createBottomTabNavigator();
 
 export default function Navigation(){
@@ -27,7 +27,7 @@ export default function Navigation(){
         <FontAwesome name="comments" color={'#F2CF66'} size={size} />
       ), }}/>
 
-        <Tab.Screen name= "Salir" component={Salir} options={{ title:'Salir',headerShown:false ,
+        <Tab.Screen name= "SalirStack" component={SalirStack} options={{ title:'Salir',headerShown:false ,
         tabBarIcon: ({ color, size }) => (
           <Entypo name="log-out" size={24} color="#F2CF66" />
       ), }}/>

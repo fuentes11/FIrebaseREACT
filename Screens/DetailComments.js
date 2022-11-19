@@ -34,7 +34,7 @@ export default function DetailComments(props) {
       const dbRef = todo.doc(props.route.params.sendId);
       await dbRef.delete();
       setLoading(false)
-      props.navigation.navigate("CommentsG");
+      props.navigation.navigate("Navigation");
     };
   
     const openConfirmationAlert = () => {
@@ -73,8 +73,9 @@ export default function DetailComments(props) {
     }
   
     return (
-      <ScrollView style={styles.container}>
-        <View>
+      <SafeAreaView style={styles.container}>
+      <ScrollView >
+        <View > 
           <TextInput
             placeholder="Comment"
             style={styles.inputGroup}
@@ -95,11 +96,15 @@ export default function DetailComments(props) {
         </View>
       
       </ScrollView>
+      </SafeAreaView>
     );
   };
 
   const styles = StyleSheet.create({
     container: {
+      alignContent:'center',
+      alignItems:'center',
+      backgroundColor:'#113361',
       flex: 1,
       padding: 35,
     },
@@ -115,6 +120,8 @@ export default function DetailComments(props) {
     inputGroup: {
       flex: 1,
       padding: 0,
+      color:'white',
+      marginTop:30,
       marginBottom: 15,
       borderBottomWidth: 1,
       borderBottomColor: "#cccccc",

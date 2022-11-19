@@ -1,6 +1,6 @@
 //import elements(Importación de elementos básicos de react-native)
 import * as React from 'react';
-import { ScrollView ,StyleSheet, Text, View, Button, TextInput, Image, TouchableOpacity,  } from 'react-native';
+import { ScrollView ,StyleSheet, Text, View, Button, TextInput, Image, TouchableOpacity, Alert,  } from 'react-native';
 import { useState } from 'react';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {isEmpty} from 'lodash';
@@ -46,7 +46,7 @@ const Register =({navigation}) => {
             createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
             console.log('Cuenta creada!')
-            alert('Tu cuenta ha sido creada '+email)
+            Alert.alert('Tu cuenta ha sido creada '+email)
             const user = userCredential.user;
             console.log(user)})
             .catch(error =>{

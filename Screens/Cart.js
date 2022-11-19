@@ -1,6 +1,6 @@
 import { View, Text,SafeAreaView,StyleSheet, FlatList, TextInput, Keyboard, ScrollView,ActivityIndicator,RefreshControl } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { Avatar, Button, Icon, ListItem, } from 'react-native-elements';
+import { Avatar, Button, Icon, Input, ListItem, } from 'react-native-elements';
 import { MaterialCommunityIcons,FontAwesome,Entypo  } from '@expo/vector-icons';
 import { collection,getDocs,doc, setDoc } from "firebase/firestore";
 import {firebase} from '../BBDD/bd';
@@ -17,8 +17,18 @@ function Sending(Carrito){
   Factura+='\n Total a pagar: $'+ TotalFinal
   return(Factura)
 }
+function totales(final){
+  var Facturas="Pedido:\n";
+  var TotalFinals=0;
+  final.map((price,i)=>{
+    TotalFinals+=price.price;
+  })
+  Facturas+='\n Total a pagar: $'+ TotalFinals
+  return(Facturas)
+}
 
 export default function Cart(props) {
+  
   const {navigation} = props;
   const wait = (timeout) => {
     return new Promise(resolve => setTimeout(resolve, timeout));
@@ -28,7 +38,7 @@ export default function Cart(props) {
     setRefreshing(true);
     wait(2000).then(() => setRefreshing(false));
   }, []);
-  let url = "whatsapp://send?text="+ Sending(global.Cart)+ "&phone=50374819876"
+  let url = "whatsapp://send?text="+ Sending(global.Cart)+ "&phone=50370508533"
   
 
 return (
@@ -67,26 +77,29 @@ return (
             
           </View>
           
+          
         </View>
       
           )
           
-            
           
   })
+  
 }
+
+
 <TouchableOpacity 
 style={styles.Button}
 onPress={() => {Linking.openURL(url),global.Cart=[]
 }}>
   <Text>Enviar Pedido <FontAwesome name="send-o" size={24} color="black" /></Text>
-  
-
 </TouchableOpacity>
 </ScrollView>
  </SafeAreaView>
 
+
 );
+
 }
 
 

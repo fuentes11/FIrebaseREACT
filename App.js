@@ -16,6 +16,7 @@ import LoginController from './NAV/LoginController'
 import Cart from './Screens/Cart';
 
 import Login from './Screens/Login';
+import Salir from './Screens/Salir';
 
 function TabBarIcon({name, color}){
   return(
@@ -77,13 +78,14 @@ function MyStack(props) {
       <Stack.Screen
         name="DetailComments"
         component={DetailComments}
-        options={{ title: "DetailComments" , headerShown: false}}/>
+        options={{ title: "DetailComments" , headerShown: true}}/>
       
       <Stack.Screen
       name='Cart'
       component={Cart}
       options={{ title:"Cart" }}
       />
+      
       
       
       

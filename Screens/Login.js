@@ -1,6 +1,6 @@
 //import elements(Importación de elementos básicos de react-native)
 import * as React from 'react';
-import { ScrollView ,StyleSheet, Text, View, Button, TextInput, Image, TouchableOpacity,  } from 'react-native';
+import { ScrollView ,StyleSheet, Text, View, Button, TextInput, Image, TouchableOpacity, Alert,  } from 'react-native';
 import { useState } from 'react';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Ionicons from 'react-native-vector-icons/Ionicons';//import icons(Importación de iconos)
@@ -33,7 +33,8 @@ const auth = getAuth()
   };
   const handleSignIn=(userCredential)=>{
     signInWithEmailAndPassword(auth,email,password).then(()=>{
-        alert('Signed in')
+      Alert.alert(
+        'Bien Hecho!!')
         const user = userCredential.user
         navigation.navigate('Main')
     }).catch(e =>{

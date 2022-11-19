@@ -53,7 +53,7 @@ export default function Home(props) {
               <ListItem.Content >
                 <ListItem.Title>{send.name}</ListItem.Title>
                 <ListItem.Subtitle>{send.details}</ListItem.Subtitle>
-                <ListItem.Subtitle>{send.price}</ListItem.Subtitle>              
+                <ListItem.Subtitle>${send.price}</ListItem.Subtitle>              
               </ListItem.Content>
             </ListItem>
           );
